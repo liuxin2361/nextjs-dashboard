@@ -4,10 +4,14 @@ import Search from '@/app/ui/search';
 import InvoicesTable from '@/app/ui/invoices/table';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { fetchInvoicesPages } from '@/app/lib/data';
+import Pagination from '@/app/ui/invoices/pagination';
 
 export default async function Page({ searchParams, }: { searchParams?: { query?: string, page?: string }; }) {
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
+
+    const totalPage = await fetchInvoicesPages(query);
 
     return (
         <div className="w-full">
@@ -18,10 +22,11 @@ export default async function Page({ searchParams, }: { searchParams?: { query?:
                 <Search placeholder="Search invoices..." />
                 <CreateInvoice />
             </div>
+            <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+                <InvoicesTable query={query} currentPage={currentPage} />
+            </Suspense>
             <div className='mt-5 flex w-full justify-center'>
-                <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-                    <InvoicesTable query={query} currentPage={currentPage} />
-                </Suspense>
+                <Pagination totalPages={totalPage} />
             </div >
         </div >
     )
