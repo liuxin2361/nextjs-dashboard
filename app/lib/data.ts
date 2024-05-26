@@ -177,7 +177,7 @@ export async function fetchInvoiceById(id: string) {
 }
 
 export async function fetchCustomers() {
-  noStore();
+  noStore(); // not use cache
   try {
     const data = await sql<CustomerField>`
       SELECT
