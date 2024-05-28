@@ -5,7 +5,7 @@ import { customers } from "./placeholder-data";
 import { z } from 'zod';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getUser, signIn } from "@/auth";
+import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from 'bcrypt';
 
