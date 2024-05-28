@@ -1,8 +1,5 @@
 import { fetchFilteredCustomers } from "@/app/lib/data";
 import CustomersTable from "@/app/ui/customers/table";
-import { lusitana } from "@/app/ui/fonts";
-import { CreateCustomer } from "@/app/ui/invoices/buttons";
-import Search from "@/app/ui/search";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
